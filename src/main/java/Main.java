@@ -26,6 +26,12 @@ public class Main {
 
         p("Example017");
         Study017.piyo();
+
+        p("Example019");
+        Study.n019();
+
+        p("Example020");
+        Study.n020();
     }
 
     public static void p(String s) {
