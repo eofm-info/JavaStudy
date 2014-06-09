@@ -32,6 +32,27 @@ public class Main {
 
         p("Example020");
         Study.n020();
+
+        p("Example023");
+        Study.n023();
+
+        p("Example027");
+        Study.n027();
+
+        p("Example028");
+        Study.n028();
+
+        p("Example029");
+        Study.n029();
+
+        p("Example030");
+        Study.n030();
+
+        p("Example031");
+        Study.n031();
+
+        p("Example032");
+        Study.n032();
     }
 
     public static void p(String s) {

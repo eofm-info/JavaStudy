@@ -1,10 +1,10 @@
 package info.efom.Gyakuhiki;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by jn on 2014/05/27.
@@ -90,6 +90,218 @@ public class Study {
         if ("Java".equals(str)) {
             // 片方が文字列リテラルなら、比較するときリテラル側のequalsを呼び出せば
             // ぬるぽ回避できる
+        }
+    }
+
+    public static void n023() {
+        Optional<String> exist = Optional.of("123");
+
+        // 空のOptional
+        Optional<String> empty = Optional.empty();
+
+        // 値がnull意外の場合は値を持つOptional, nullの場合は空のOptionalを生成する
+        String value = "piyo";
+        Optional<String> optional = Optional.ofNullable(value);
+
+        // 値を取得
+        String value1 = optional.get();
+
+        // 値が存在しない場合は空文字列を返す
+        String value2 = optional.orElse("");
+
+        // 値が存在しない場合はラムダ式の結果を返す
+        String value3 = optional.orElseGet(() -> {
+            return new SimpleDateFormat("yyyyMMddHHmmSS").format(new Date());
+        });
+
+        // 値が存在しない場合は例外をスローする
+        // java.lang.Exceptionを設定できないんだけど……
+        //String value4 = optional.orElseThrow(() -> new Exception("値がありません"));
+        String value4 = optional.orElseThrow(() -> new RuntimeException("値がありません"));
+
+        // 値が存在するがどうかを判定して処理を行う。
+        if (optional.isPresent()) {
+            System.out.println(optional.get());
+        }
+
+        // 値がある場合だけラムダ式の処理を行う
+        optional.ifPresent(s -> {
+            System.out.println(s);
+        });
+    }
+
+    public static void n027() {
+        // if
+        int i = 10;
+
+        if (i < 10) {
+            System.out.println("10より小さい");
+        } else {
+            System.out.println("10以上");
+        }
+
+        // else は省略可
+        if (i < 10) {
+            System.out.println("10より小さい");
+        }
+
+        // 条件が複数の場合、最初にtrueになった1ブロックのみ実行される
+        if (i < 20 && i % 2 == 0) {
+            System.out.println("20より小さいかつ偶数"); // 実行される
+        } else if (i < 20) {
+            System.out.println("20より小さい"); // 実行されない
+        } else {
+            System.out.println("それ意外");
+        }
+
+        // {}省略できる
+        if (i < 10) System.out.println("10より小さい");
+
+
+        // いぇーブロックのスコープ！
+        String name = "piyo";
+        if (name != null) {
+            // ブロック外で宣言したnameをブロック内で参照可能
+            String m = "Hello " + name;
+        }
+
+        // コンパイルエラー
+        //System.out.println(m);
+
+        // ブロックで変数のスコープを固定する
+        {
+            String name2 = "piyo";
+        }
+        {
+            // 同じ名前が使える
+            String name2 = "ぴよ";
+        }
+    }
+
+    public static void n028() {
+        // switch
+        int i = 10;
+
+        switch(i) {
+            case 10:
+                System.out.println("10");
+                break;
+
+            // それ意外
+            default:
+                System.out.println("10以外");
+        }
+
+        // defaultは省略可能
+        switch (i) {
+            case 10:
+                System.out.println("10");
+                break;
+        }
+
+        // break を省略すると次のcase文を実行
+        switch (i) {
+            case 5:
+            case 10:
+                System.out.println("5または10");
+                break;
+            default:
+                System.out.print("それ以外");
+        }
+
+        // if, else switch !!!
+        String str = null;
+        if (str == null) {
+            // nullの時
+        } else switch (str) {
+            case "hoge":
+                // ...
+        }
+    }
+
+    public static void n029() {
+        // for
+        for (int i = 0; i < 3; i++) {
+            System.out.println(i + "番目の処理");
+        }
+
+        List<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+
+        // for文の場合
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+
+        // 拡張for
+        for (String str : list) {
+            System.out.println(str);
+        }
+    }
+
+    public static void n030() {
+        // while
+        int i = 0;
+        while (i < 5) {
+            i = (int)(Math.random() * 10);
+            System.out.println(1);
+        }
+
+        // do, while
+        int j = 0;
+        do {
+            System.out.println(j);
+        } while (j > 0); // false なので終了
+    }
+
+    public static void n031() {
+        // 繰り返し処理を途中で終了するじゃん?
+        List<String> list = Arrays.asList("Scala", "Java", "Groovy");
+
+        for (String str : list) {
+            if ("Java".equals(str)) {
+                break;
+            }
+            System.out.println(str); // => Scala
+        }
+
+        for (String str : list) {
+            if ("Java".equals(str)) {
+                continue;
+            }
+            System.out.println(str); // => Scala, Groovy
+        }
+
+        // 入れ子になったループは
+        // label:
+        // break outer;
+        // 明示的に指定して抜ける必要がある
+    }
+
+    public static void n032() {
+        // 例外
+        try {
+            new File("test").createNewFile();
+        // IOExceptionが発生した場合
+        } catch (IOException e) {
+            System.out.println("ファイルの生成に失敗しました" + e.getMessage());
+        }
+
+        try {
+            new File("test").createNewFile();
+            // IOExceptionが発生した場合
+        } catch (IOException e) {
+            System.out.println("ファイルの生成に失敗しました" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Exception発生"); // 実行されない
+        }
+
+        try {
+            // コンパイルできひん
+            //new File("test").createNewFile();
+        } finally {
+            System.out.println("必ず実行される");
         }
     }
 
