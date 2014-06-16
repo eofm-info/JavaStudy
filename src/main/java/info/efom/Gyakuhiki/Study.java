@@ -1,8 +1,10 @@
 package info.efom.Gyakuhiki;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -302,6 +304,58 @@ public class Study {
             //new File("test").createNewFile();
         } finally {
             System.out.println("必ず実行される");
+        }
+    }
+
+    public static void n033() {
+        // 複数の例外をまとめてキャッチ
+        try {
+            Date date = new SimpleDateFormat("yyyyMMdd").parse("20140401");
+
+            new File(String.format("新規ファイル%s.txt", date.getTime())).createNewFile();
+
+        // ParseExceptionまたはIOExceptionが発生した場合
+        } catch (ParseException | IOException e) {
+            System.out.println("例外発生: " + e.getMessage());
+        }
+
+        // catch(fileNotFoundException | IOException e) コンパイルエラーになるよ
+    }
+
+    public void n034() throws IOException {
+        // 例外をスローしたい
+        File file = new File("test.txt");
+
+        if (file.createNewFile()) {
+            System.out.println("ファイルを作成しました");
+        } else {
+            // ファイルが既に存在する場合はIOExceptionをスロー
+            throw new IOException("ファイルはすでに存在します。");
+        }
+    }
+
+    public void n034_2() throws ParseException, IOException {
+        // 複数例外スロー
+    }
+
+    public static void n035() {
+        try (FileInputStream in = new FileInputStream("test.txt")) {
+            // 読み込み処理
+        } catch (IOException e) {
+        }
+    }
+
+    // 37 - 41 はスキップで
+    // 暇ならやる
+
+    public static void n042() {
+        // 文字列を連結したい
+        String str = "Hello " + "World!";
+        System.out.println(str);
+
+        String str2 = "";
+        for (long i = 0; i < Long.MAX_VALUE; i++) {
+            str2 = str2 + " ";
         }
     }
 

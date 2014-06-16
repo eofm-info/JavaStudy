@@ -53,6 +53,9 @@ public class Main {
 
         p("Example032");
         Study.n032();
+
+        p("Example033");
+        Study.n033();
     }
 
     public static void p(String s) {
