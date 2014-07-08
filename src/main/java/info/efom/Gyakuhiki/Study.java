@@ -353,10 +353,10 @@ public class Study {
         String str = "Hello " + "World!";
         System.out.println(str);
 
-        String str2 = "";
-        for (long i = 0; i < Long.MAX_VALUE; i++) {
-            str2 = str2 + " ";
-        }
+        //String str2 = "";
+        //for (long i = 0; i < Long.MAX_VALUE; i++) {
+        //    str2 = str2 + " ";
+        //}
 
         StringBuilder sb = new StringBuilder();
         sb.append("Hello ");
