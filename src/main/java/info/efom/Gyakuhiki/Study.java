@@ -357,6 +357,20 @@ public class Study {
         for (long i = 0; i < Long.MAX_VALUE; i++) {
             str2 = str2 + " ";
         }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hello ");
+        sb.append("World!");
+
+        String str3 = sb.toString();
+        System.out.println(str3);
+    }
+
+    public static void n043() {
+        String str = "こんにちは世界";
+        int strlength = str.length();
+        System.out.println(strlength);
+
     }
 
 }
