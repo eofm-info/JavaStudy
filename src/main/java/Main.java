@@ -1,5 +1,8 @@
 import info.efom.Gyakuhiki.*;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
 public class Main {
     /**
      * mainメソッド。
@@ -87,7 +90,26 @@ public class Main {
         N068Sub n068Sub = new N068Sub("n068 piyo");
         n068Sub.print();
 
+        // TODO: piyo
+
+        p("Example075");
+        Study.compare(Sex.MAN);
+        Study.n075();
+
+        p("Example076");
+        Color color1 = Sex.MAN;
+        String n076str1 = color1.getColor();
+        Color color2 = Sex.WOMEN;
+        String n076str2 = color2.getColor();
+        System.out.println(n076str1);
+        System.out.println(n076str2);
+
+        p("Example080");
+        FileStore<FileOutputStream> store1 = new FileStore<>();
+        // コンパイルエラー
+        //FileStore<FileInputStream> store2 = new FileStore<>();
     }
+
 
     public static void p(String s) {
         System.out.println();

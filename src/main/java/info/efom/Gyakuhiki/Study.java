@@ -373,4 +373,29 @@ public class Study {
 
     }
 
+    public static void compare(Sex sex) {
+        switch (sex) {
+            case MAN:
+                System.out.println("男");
+                break;
+            case WOMEN:
+                System.out.println("女");
+                break;
+        }
+    }
+
+    public static void n075() {
+        Sex man = Sex.valueOf("MAN");
+
+        for (Sex sex : Sex.values()) {
+            System.out.println("name():" + sex.name());
+
+            System.out.println(" toString():" + sex.toString());
+
+            System.out.println(" ordinal():" + sex.toString());
+
+            System.out.println(" compareTo():" + sex.compareTo(Sex.WOMEN));
+        }
+    }
+
 }
