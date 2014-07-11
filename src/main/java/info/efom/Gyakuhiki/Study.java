@@ -3,7 +3,7 @@ package info.efom.Gyakuhiki;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
+import java.lang.reflect.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -395,6 +395,51 @@ public class Study {
             System.out.println(" ordinal():" + sex.toString());
 
             System.out.println(" compareTo():" + sex.compareTo(Sex.WOMEN));
+        }
+    }
+
+    public static void n086() {
+        Class<Exception> e = Exception.class;
+
+        Exception instance = new Exception();
+        Class<? extends Exception> f = instance.getClass();
+
+        Class<Runnable> c = Runnable.class;
+        System.out.println(c.isInterface());
+        System.out.println(c.isAnnotation());
+        System.out.println(c.isArray());
+        System.out.println(c.isEnum());
+        System.out.println(c.isInstance(new Thread()));
+        System.out.println(c.isAssignableFrom(Thread.class));
+    }
+
+    public static void n087() {
+        for (Constructor<?> constructor : File.class.getConstructors()) {
+            String name = constructor.getName();
+            Class<?>[] type = constructor.getParameterTypes();
+            boolean mod = Modifier.isPublic(constructor.getModifiers());
+        }
+
+        for (Method method : File.class.getMethods()) {
+            String name = method.getName();
+            Class<?> type = method.getReturnType();
+            Class<?> [] params = method.getParameterTypes();
+            boolean mod = Modifier.isStatic(method.getModifiers());
+        }
+
+        for (Field field : File.class.getFields()) {
+            String name = field.getName();
+            Class<?> type = field.getType();
+            boolean mod = Modifier.isFinal(field.getModifiers());
+        }
+    }
+
+    public static void n088() {
+        try {
+            StringBuilder sb = StringBuilder.class.newInstance();
+            StringBuilder sb2 = StringBuilder.class.getConstructor(String.class).newInstance("初期値");
+        } catch (ReflectiveOperationException e) {
+            throw new RuntimeException(e);
         }
     }
 

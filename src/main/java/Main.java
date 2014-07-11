@@ -108,6 +108,20 @@ public class Main {
         FileStore<FileOutputStream> store1 = new FileStore<>();
         // コンパイルエラー
         //FileStore<FileInputStream> store2 = new FileStore<>();
+
+        // コンパイラを味方に！
+        // -> コンパイラに、より多くの情報を伝える
+        // アノテーション！
+
+        // コンパイラの裏を書く
+        // -> リフレクション
+
+        // オブジェクトをJavaプロセスの外へ出したい
+        // シリアライズ <-> デシリアライズ
+        // マージャリング(ruby)
+
+        p("Example086");
+        Study.n086();
     }
 
 
